@@ -15,6 +15,7 @@ best development practices.
 ## Sub-Projects
 
 * **comics-api** - an SDK for Marvel Comics API.
+* **my-heroes** - a Rust web application front-end/back-end.
 
 ## Attribution
 
