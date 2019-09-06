@@ -33,11 +33,13 @@ $ echo .dump | sqlite3 heroesdb.sqlite3
 ## Usage
 
 ```
+$ cd my-heroes
 $ cargo build --release
-$ target/release/my-heroes-cli --help
+$ target/release/my-heroes-cli new --help
 $ target/release/my-heroes-cli new 'Spider-Man'
 $ target/release/my-heroes-cli new 'Captain America'
 $ echo 'select * from heroes;' | sqlite3 heroesdb.sqlite3
 > 1|Spider-Man
 > 2|Captain America
+$ target/release/my-heroes-cli list
 ```
