@@ -1,28 +1,49 @@
 // use futures::{Future, Stream};
-use gotham::{
-    helpers::http::response::create_response,
-    router::{
-        builder::*,
-        Router,
-    },
-    state::State,
+use gotham::router::{
+    builder::*,
+    Router,
 };
-use hyper::{Body, Response, StatusCode};
 
-fn say_hello(state: State) -> (State, Response<Body>) {
-    let res = create_response(
-        &state,
-        StatusCode::OK,
-        mime::TEXT_PLAIN,
-        String::from("My Heroes!"),
-    );
+pub mod handlers {
+    use hyper::{Body, Response, StatusCode};
+    use gotham::{
+        helpers::http::response::create_response,
+        state::State,
+    };
 
-    (state, res)
+    pub fn index(state: State) -> (State, Response<Body>) {
+        let res = create_response(
+            &state,
+            StatusCode::OK,
+            mime::TEXT_PLAIN,
+            String::from("My Heroes!"),
+        );
+
+        (state, res)
+    }
+
+    pub mod heroes {
+        use super::*;
+
+        pub fn index(state: State) -> (State, Response<Body>) {
+            let res = create_response(
+                &state,
+                StatusCode::OK,
+                mime::TEXT_PLAIN,
+                String::from("List Heroes!"),
+            );
+
+            (state, res)
+        }
+    }
 }
 
 fn router() -> Router {
+    use handlers::*;
+
     build_simple_router(|route| {
-        route.get("/").to(say_hello);
+        route.get_or_head("/").to(index);
+        route.get_or_head("/heroes").to(heroes::index);
     })
 }
 
