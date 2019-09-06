@@ -9,3 +9,9 @@ edition = "2018"
 [dependencies]
 diesel = { version = "1.4.0", features = ["sqlite"] }
 dotenv = "0.14.0"
+futures = "0.1.0"
+gotham = "0.4.0"
+hyper = "0.12.0"
+mime = "0.3.0"
+tokio = "0.1.0"
+tokio-signal = "0.2.0"
